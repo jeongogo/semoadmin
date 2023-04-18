@@ -26,15 +26,39 @@ code {
 
 input[type='text'],
 input[type='email'],
-input[type='password'] {
+input[type='password'],
+textarea {
   height: 4rem;
   padding: 0 1rem;
   border: 1px solid #ebedf2;
   border-radius: 5px;
 }
 
+textarea {
+  padding: 1rem;
+  height: auto;
+  resize: none;
+}
+
 input[type='text']::placeholder,
 input[type='email']::placeholder,
-input[type='password']::placeholder {
+input[type='password']::placeholder,
+textarea::placeholder {
   color: #ddd;
+}
+
+.btn-wrap {
+  display: flex;
+  justify-content: center;
+}
+
+button.primary {
+  display: inline-block;
+  text-align: center;
+  min-width: 15rem;
+  height: 4rem;
+  line-height: 4rem;
+  color: white;
+  background-color: #7E57C2;
+  border-radius: 5px;
 }

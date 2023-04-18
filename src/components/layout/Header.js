@@ -1,21 +1,21 @@
 import React from 'react';
-import { signOut } from "firebase/auth";
-import { auth } from "../../firebase-config";
+import { useNavigate } from 'react-router-dom';
 import useStore from '../../store/store';
 import styled from 'styled-components';
+import { signOut } from "../../lib/auth";
 
 const Header = () => {
+  const navigate = useNavigate();
   const setUser = useStore((state) => state.setUser);
 
-  const onLogout = () => {
-    signOut(auth)
-    .then(() => {
-      console.log('signOut Success');
-    })
-    .catch((error) => {
-      console.log(error.code, error.message);
-    });
-    setUser('');
+  const onLogout = async () => {
+    try {
+      await signOut();
+      setUser('');
+      navigate('/');
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   return (
