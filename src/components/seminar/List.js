@@ -1,19 +1,24 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import useStore from '../../store/store';
 import styled from 'styled-components';
 
 const List = ({list}) => {
+  const navigate = useNavigate();
+  const setSeminar = useStore((state) => state.setSeminar);
+
+  const goDetail = (item) => {
+    setSeminar(item);
+    navigate(`/seminar/${item.id}`);
+  }
+
   return (
     <Container>
       <div className="list">
         <ul>
           {list && list.map((i) => (
             <li key={i.id}>
-              <div className="title">{i.title}</div>
-              <div className="content">{i.content}</div>
-              <div className="poster">
-                <img src={i.posterUrl} alt="" />
-              </div>
+              <button className="title" onClick={() => goDetail(i)}>{i.title}</button>
             </li>
           ))}
         </ul>
@@ -35,10 +40,12 @@ const Container = styled.div`
   .list {
     ul {
       li {
-        .poster {
-          img {
-            width: 200px;
-          }
+        border-bottom: 1px solid #ededed;
+        button {
+          display: block;
+          width: 100%;
+          padding: 1.5rem 1rem;
+          text-align: left;
         }
       }
     }
